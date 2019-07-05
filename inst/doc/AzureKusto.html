@@ -398,7 +398,12 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="dbi-interface" class="section level3">
 <h3>DBI interface</h3>
 <p>AzureKusto implements a subset of the DBI specification for interfacing with databases in R.</p>
-<p>The following methods are supported: - Connections: [dbConnect], [dbDisconnect], [dbCanConnect] - Table management: [dbExistsTable], [dbCreateTable], [dbRemoveTable], [dbReadTable], [dbWriteTable] - Querying: [dbGetQuery], [dbSendQuery], [dbFetch], [dbSendStatement], [dbExecute], [dbListFields], [dbColumnInfo]</p>
+<p>The following methods are supported:</p>
+<ul>
+<li>Connections: <code>dbConnect</code>, <code>dbDisconnect</code>, <code>dbCanConnect</code></li>
+<li>Table management: <code>dbExistsTable</code>, <code>dbCreateTable</code>, <code>dbRemoveTable</code>, <code>dbReadTable</code>, <code>dbWriteTable</code></li>
+<li>Querying: <code>dbGetQuery</code>, <code>dbSendQuery</code>, <code>dbFetch</code>, <code>dbSendStatement</code>, <code>dbExecute</code>, <code>dbListFields</code>, <code>dbColumnInfo</code></li>
+</ul>
 <p>Azure Data Explorer is quite different to the SQL databases that DBI targets, which affects the behaviour of certain DBI methods and renders other moot.</p>
 <ul>
 <li>Communication goes through the REST API rather than a socket connection. Therefore, <code>dbConnect</code> simply wraps a database endpoint object, created with [kusto_database_endpoint]. Similarly, <code>dbDisconnect</code> always returns TRUE. <code>dbCanConnect</code> attempts to check if querying the database will succeed, but this may not be accurate.</li>
