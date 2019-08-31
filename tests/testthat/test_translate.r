@@ -4,17 +4,18 @@ context("translate")
 tbl_iris <- tibble::as_tibble(iris)
 names(tbl_iris) <- c("SepalLength", "SepalWidth", "PetalLength", "PetalWidth", "Species")
 tbl_iris <- tbl_kusto_abstract(tbl_iris, "iris")
-
+tidyr_version <- as.character(packageVersion("tidyr"))
+is_new_tidyr <- compareVersion(tidyr_version, '0.8.3') == 1
 
 test_that("params to a function can be used inside a mutate expressions",
 {
     tbl_iris_p <- tibble::as_tibble(iris)
     names(tbl_iris_p) <- c("SepalLength", "SepalWidth", "PetalLength", "PetalWidth", "Species")
     tbl_iris_p <- tbl_kusto_abstract(tbl_iris, "iris", p="setosa")
-    
+
     q <- tbl_iris_p %>%
         mutate(Species = p)
-    
+
     q_str <- show_query(q)
 
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['iris']\n| extend ['Species'] = 'setosa'"))
@@ -22,11 +23,10 @@ test_that("params to a function can be used inside a mutate expressions",
 
 test_that("params to a function can be used inside a filter expressions",
 {
-    
     tbl_iris_p <- tibble::as_tibble(iris)
     names(tbl_iris_p) <- c("SepalLength", "SepalWidth", "PetalLength", "PetalWidth", "Species")
     tbl_iris_p <- tbl_kusto_abstract(tbl_iris_p, "iris", p="setosa")
-    
+
     q <- filter(tbl_iris_p, Species == p)
     q_str <- show_query(q)
 
@@ -432,7 +432,6 @@ test_that("union_all translates correctly",
 
 test_that("as.Date() produces a Kusto datetime",
 {
-    
     dates <- c("2019-01-01", "2019-01-02", "2019-01-03")
     dates <- as.Date(dates)
     words <- c("Tuesday", "Wednesday", "Thursday")
@@ -446,12 +445,10 @@ test_that("as.Date() produces a Kusto datetime",
     q_str <- show_query(q)
 
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['df']\n| where ['dates'] == todatetime('2019-01-01')"))
-    
 })
 
 test_that("as.POSIXct() produces a Kusto datetime",
 {
-    
     dates <- c("2019-01-01T23:59:59", "2019-01-02T23:59:58", "2019-01-03T00:00:00")
     dates <- as.POSIXct(strptime(dates, "%Y-%m-%dT%H:%M:%S", tz="UTC"))
     words <- c("Tuesday", "Wednesday", "Thursday")
@@ -465,12 +462,10 @@ test_that("as.POSIXct() produces a Kusto datetime",
     q_str <- show_query(q)
 
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['df']\n| where ['dates'] == todatetime(todatetime('2019-01-01T23:59:59'))"))
-    
 })
 
 test_that("as.POSIXlt() produces a Kusto datetime",
 {
-    
     dates <- c("2019-01-01", "2019-01-02", "2019-01-03")
     dates <- as.POSIXlt(dates)
     words <- c("Tuesday", "Wednesday", "Thursday")
@@ -484,7 +479,6 @@ test_that("as.POSIXlt() produces a Kusto datetime",
     q_str <- show_query(q)
 
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['df']\n| where ['dates'] == todatetime('2019-01-01')"))
-    
 })
 
 test_that("join hinting translates correctly",
@@ -578,38 +572,56 @@ test_that("unnest can handle multiple columns",
 
     list_tbl <- tbl_kusto_abstract(list_df, table_name = "list_tbl")
 
-    q <- list_tbl %>%
-        tidyr::unnest(y, z)
+    if (is_new_tidyr)
+    {
+        q <- list_tbl %>%
+            tidyr::unnest(c(y, z))
+    }
+    else
+    {
+        q <- list_tbl %>%
+            tidyr::unnest(y, z)
+    }
 
     q_str <- show_query(q)
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['list_tbl']\n| mv-expand ['y'], ['z']"))
 
 })
 
-test_that("unnest .id translates to with_itemindex",
+if (!is_new_tidyr)
 {
+    test_that("unnest .id translates to with_itemindex",
+    {
 
-    list_df <- tibble::tibble(
-        x = 1:2,
-        y = list(a = 1, b = 3:4)
-        )
+        list_df <- tibble::tibble(
+                               x = 1:2,
+                               y = list(a = 1, b = 3:4)
+                           )
 
-    list_tbl <- tbl_kusto_abstract(list_df, table_name = "list_tbl")
+        list_tbl <- tbl_kusto_abstract(list_df, table_name = "list_tbl")
 
-    q <- list_tbl %>%
-        tidyr::unnest(y, .id = "name")
+        q <- list_tbl %>%
+            tidyr::unnest(y, .id = "name")
 
-    q_str <- show_query(q)
+        q_str <- show_query(q)
 
-    expect_equal(q_str, kql("cluster('local_df').database('local_df').['list_tbl']\n| mv-expand with_itemindex=['name'] ['y']"))
-
-})
+        expect_equal(q_str, kql("cluster('local_df').database('local_df').['list_tbl']\n| mv-expand with_itemindex=['name'] ['y']"))
+    })
+}
 
 test_that("nest translates to summarize makelist()",
 {
+    if (is_new_tidyr)
+    {
+        q <- tbl_iris %>%
+            tidyr::nest(data = c(SepalLength, SepalWidth, PetalLength, PetalWidth))
+    }
+    else
+    {
+        q <- tbl_iris %>%
+            tidyr::nest(SepalLength, SepalWidth, PetalLength, PetalWidth)
+    }
 
-    q <- tbl_iris %>%
-        tidyr::nest(SepalLength, SepalWidth, PetalLength, PetalWidth)
 
     q_str <- show_query(q)
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['iris']\n| summarize ['SepalLength'] = make_list(['SepalLength']), ['SepalWidth'] = make_list(['SepalWidth']), ['PetalLength'] = make_list(['PetalLength']), ['PetalWidth'] = make_list(['PetalWidth']) by ['Species']"))
@@ -628,8 +640,16 @@ test_that("nest respects preceding group_by",
 
 test_that("nest nests all non-provided columns",
 {
-    q <- tbl_iris %>%
+    if (is_new_tidyr)
+    {
+        q <- tbl_iris %>%
+        tidyr::nest(data = c(-Species))
+    }
+    else
+    {
+        q <- tbl_iris %>%
         tidyr::nest(-Species)
+    }
 
     q_str <- show_query(q)
     expect_equal(q_str, kql("cluster('local_df').database('local_df').['iris']\n| summarize ['SepalLength'] = make_list(['SepalLength']), ['SepalWidth'] = make_list(['SepalWidth']), ['PetalLength'] = make_list(['PetalLength']), ['PetalWidth'] = make_list(['PetalWidth']) by ['Species']"))
