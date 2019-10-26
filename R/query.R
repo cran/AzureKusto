@@ -79,7 +79,7 @@ build_param_list <- function(query_params)
 build_request_body <- function(db, qry_cmd, query_options=list(), query_parameters=list())
 {
     default_query_options <- list(
-        queryconsistency="weakconsistency",
+        queryconsistency="strongconsistency",
         response_dynamic_serialization="string",
         response_dynamic_serialization_2="legacy")
 
@@ -108,10 +108,8 @@ build_request_body <- function(db, qry_cmd, query_options=list(), query_paramete
 
 build_auth_str <- function(token=NULL, user=NULL, password=NULL)
 {
-    token <- validate_token(token)
-
     auth_str <- if(!is.null(token))
-        paste("Bearer", token)
+        paste("Bearer", validate_token(token))
     else if(!is.null(user) && !is.null(password))
         paste("Basic", openssl::base64_encode(paste(user, password, sep=":")))
     else stop("Must provide authentication details")

@@ -1,9 +1,9 @@
 Package: AzureKusto
 Title: Interface to 'Kusto'/'Azure Data Explorer'
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: c(
-    person("Hong", "Ooi", , "hongooi@microsoft.com", role = c("aut", "cre")),
-    person("Alex", "Kyllo", , "jekyllo@microsoft.com", role = "aut"),
+    person("Hong", "Ooi", , "hongooi@microsoft.com", role = "aut"),
+    person("Alex", "Kyllo", , "jekyllo@microsoft.com", role = c("aut", "cre")),
     person("dbplyr development team", role="cph", comment="Original framework for dplyr/database interface"),
     person("Microsoft", role = "cph")
     )
@@ -22,12 +22,12 @@ Suggests: bit64, knitr, testthat, tidyr, AzureGraph, AzureStor (>=
         2.0.0), rmarkdown
 RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2019-08-31 08:07:12 UTC; hongo
-Author: Hong Ooi [aut, cre],
-  Alex Kyllo [aut],
+Packaged: 2019-10-26 11:43:23 UTC; hongo
+Author: Hong Ooi [aut],
+  Alex Kyllo [aut, cre],
   dbplyr development team [cph] (Original framework for dplyr/database
     interface),
   Microsoft [cph]
-Maintainer: Hong Ooi <hongooi@microsoft.com>
+Maintainer: Alex Kyllo <jekyllo@microsoft.com>
 Repository: CRAN
-Date/Publication: 2019-08-31 08:50:02 UTC
+Date/Publication: 2019-10-26 22:30:08 UTC

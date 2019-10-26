@@ -1,7 +1,7 @@
-ccc90dade6faba8eb0e091c5f38208df *DESCRIPTION
+8e0bc3943d79394a5a9b9dc696a4e41c *DESCRIPTION
 e3c54e704fc59fe5bd50db6d4806d6bf *LICENSE
 30b70ecadc977aa3a222d1b0edeaa434 *NAMESPACE
-a14b13b90016acd3a4e37fa50e4b495c *NEWS.md
+d823e21a02b94ab559efaf2f41adc61f *NEWS.md
 364d64843917837e63145810294c7040 *R/AzureKusto.R
 e32b2fa9a0d1e24d0e566ac904c0635f *R/add_methods.R
 4bfb4ae9c4f0bae9e72b5835ed167718 *R/az_database.R
@@ -16,7 +16,7 @@ d579b0f1883e6de3a73997f0bc8a58e5 *R/kql-escape.R
 6c4d8904288036f4d9d6c49c71ec2fdf *R/kusto_token.R
 07bf283f571a13e735f4cdfd73847712 *R/ops.R
 9ba72a8b6a92e9ecd206dff71755034e *R/partial_eval.R
-a4479cf7ec3dbf9a73ca71302e2108af *R/query.R
+a34513e0a5b598f1961b3584ff3ab5ee *R/query.R
 0287c2284bc0563e82f0501c4ace98a8 *R/reexport-dplyr.R
 68afd01b189ef2402b2e488d84aace3d *R/tbl.R
 0183b91a6a64440e8690bd631488a7af *R/translate-kql.R
