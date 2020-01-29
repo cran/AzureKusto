@@ -1,7 +1,7 @@
-8e0bc3943d79394a5a9b9dc696a4e41c *DESCRIPTION
+51211c3c4e50f9d60327eb3a7c1e0a03 *DESCRIPTION
 e3c54e704fc59fe5bd50db6d4806d6bf *LICENSE
 30b70ecadc977aa3a222d1b0edeaa434 *NAMESPACE
-d823e21a02b94ab559efaf2f41adc61f *NEWS.md
+2f73758527f794d32ca7f03c99aae50d *NEWS.md
 364d64843917837e63145810294c7040 *R/AzureKusto.R
 e32b2fa9a0d1e24d0e566ac904c0635f *R/add_methods.R
 4bfb4ae9c4f0bae9e72b5835ed167718 *R/az_database.R
@@ -10,7 +10,7 @@ e32b2fa9a0d1e24d0e566ac904c0635f *R/add_methods.R
 59190fc1cb6d4015022e53a114e7f32d *R/endpoint.R
 91cc201fc5e79f2064a7081f2f504df7 *R/ident.R
 506a5be09b38e282365f156cdddd37b6 *R/ingest.R
-6ee3368364b8ef367a9bb1244dfa4364 *R/kql-build.R
+702dbb5a89e3148982b43461c7f914b4 *R/kql-build.R
 d579b0f1883e6de3a73997f0bc8a58e5 *R/kql-escape.R
 1e9133f29f6ee71c60da78e929970bee *R/kql-render.R
 6c4d8904288036f4d9d6c49c71ec2fdf *R/kusto_token.R
@@ -21,10 +21,10 @@ a34513e0a5b598f1961b3584ff3ab5ee *R/query.R
 68afd01b189ef2402b2e488d84aace3d *R/tbl.R
 0183b91a6a64440e8690bd631488a7af *R/translate-kql.R
 85073fa60b2b8c5621a3c40169ef3cca *README.md
-6d6050ca3d14e0560cf1dbd1cd8be594 *build/vignette.rds
+1f583f892b1adf63617c9aa1078214a4 *build/vignette.rds
 12c95287e2bf2256f5a7192d51e16cc4 *inst/doc/AzureKusto.R
 9117594eb9f1a4a63a3851d1f3cb2a3a *inst/doc/AzureKusto.Rmd
-c015f6d14b823954ba3770c8c9c55674 *inst/doc/AzureKusto.html
+693a5aa7fd77e0e333638b7f4b450ab9 *inst/doc/AzureKusto.html
 554f10e027fd0f527e473fc08e8f96e0 *man/AzureKusto.Rd
 ab05ef4f2b51506b0ef5db23df7bba95 *man/AzureKustoConnection-class.Rd
 10465d5ba5f7f1e56b615d80fd639ce1 *man/AzureKustoDriver-class.Rd
@@ -34,8 +34,8 @@ e8cab9a3bb59d02f945874b2c1d78e20 *man/DBI_table.Rd
 504d359affaf0658467414c01234b28d *man/add_op_join.Rd
 30f5109419b896c2ab97ce4add0c5179 *man/add_op_set_op.Rd
 0e98d1767237491e4dc260cccb26fb3e *man/add_op_single.Rd
-11b139115687ad370e215fbd0cb566db *man/az_kusto.Rd
-c99925d442ff36da947ac3ca150edfaa *man/az_kusto_database.Rd
+f5e92bf041d8161678aa723210d6b501 *man/az_kusto.Rd
+742122dabd58b3487c7ba9a5c9aef9f3 *man/az_kusto_database.Rd
 24621d009869ab771db5aeaf432afc7d *man/base_agg.Rd
 6cff47ef75fa883966d888e5aa908fe4 *man/base_scalar.Rd
 0bc75596d1d842957356d9d492dd0876 *man/base_window.Rd
@@ -97,9 +97,9 @@ ed57ab454aa5c59ac939ae3739ab48be *tests/testthat/test03_resource.R
 8d91830f7bfcc325108b1a01dae7973e *tests/testthat/test04_ingest.R
 64da9e56b40ade7ac0498cc99c25cb0e *tests/testthat/test05_dbi.R
 29df2bdc8a478aa85c24168a387b7b87 *tests/testthat/test06_dplyr.R
-1c7e33bea150cb5e1e776dea9fe516f6 *tests/testthat/test_escape.R
+1c7e33bea150cb5e1e776dea9fe516f6 *tests/testthat/test_escape.r
 b4851094096632d7b227177ae879a389 *tests/testthat/test_kql_build.R
 9a71f3f10cba91dd671698489a6d8d58 *tests/testthat/test_partial_eval.R
 c972a37db06d81ae76641f1022bda444 *tests/testthat/test_query_params.R
-3ecf1912adedd4b2cbac2f87b1d95b8e *tests/testthat/test_translate.r
+70b413ed5ccc00e4642d3e6708f1f3a0 *tests/testthat/test_translate.r
 9117594eb9f1a4a63a3851d1f3cb2a3a *vignettes/AzureKusto.Rmd

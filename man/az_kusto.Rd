@@ -8,7 +8,7 @@
 \alias{delete_database}
 \alias{list_databases}
 \title{Kusto/Azure Data Explorer cluster resource class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
+\format{An object of class \code{R6ClassGenerator} of length 25.}
 \usage{
 az_kusto
 }

@@ -36,7 +36,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -290,6 +290,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -298,102 +301,102 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">AzureKusto</h1>
-<h4 class="date"><em>2019-04-15</em></h4>
+<h4 class="date">2019-04-15</h4>
 
 
 
 <p>AzureKusto is the R interface to <a href="https://azure.microsoft.com/en-us/services/data-explorer/">Azure Data Explorer</a> (internally codenamed “Kusto”), a fast, fully managed data analytics service from Microsoft.</p>
 <p>AzureKusto provides an interface (including <a href="https://dbi.r-dbi.org/">DBI</a> compliant methods) for connecting to Kusto clusters and submitting <a href="https://docs.microsoft.com/en-us/azure/kusto/query/">Kusto Query Language (KQL)</a> statements, as well as a <a href="https://dbplyr.tidyverse.org/">dbplyr</a> style backend that translates <a href="https://dplyr.tidyverse.org/">dplyr</a> queries into KQL statements.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(AzureKusto)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co">## The first time you import AzureKusto, you&#39;ll be asked if you&#39;d like to create a directory to cache OAuth2 tokens.</span></a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">## Connect to an AzureKusto database with (default) device code authentication:</span></a>
-<a class="sourceLine" id="cb1-5" title="5">Samples &lt;-<span class="st"> </span><span class="kw">kusto_database_endpoint</span>(<span class="dt">server=</span><span class="st">&quot;https://help.kusto.windows.net&quot;</span>, <span class="dt">database=</span><span class="st">&quot;Samples&quot;</span>)</a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">## To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code ######### to authenticate.</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">## Waiting for device code in browser...</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co">## Press Esc/Ctrl + C to abort</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co">## Authentication complete.</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(AzureKusto)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">## The first time you import AzureKusto, you'll be asked if you'd like to create a directory to cache OAuth2 tokens.</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">## Connect to an AzureKusto database with (default) device code authentication:</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">Samples &lt;-<span class="st"> </span><span class="kw">kusto_database_endpoint</span>(<span class="dt">server=</span><span class="st">&quot;https://help.kusto.windows.net&quot;</span>, <span class="dt">database=</span><span class="st">&quot;Samples&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">## To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code ######### to authenticate.</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">## Waiting for device code in browser...</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">## Press Esc/Ctrl + C to abort</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">## Authentication complete.</span></a></code></pre></div>
 <p>Now you can issue KQL queries to the Kusto database with <code>run_query()</code> and get the results back as a data.frame object.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">res &lt;-<span class="st"> </span><span class="kw">run_query</span>(Samples, <span class="st">&quot;StormEvents | summarize EventCount = count() by State | order by State asc&quot;</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">head</span>(res)</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">##            State EventCount</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">## 1        ALABAMA       1315</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">## 2         ALASKA        257</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co">## 3 AMERICAN SAMOA         16</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">## 4        ARIZONA        340</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="co">## 5       ARKANSAS       1028</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">## 6 ATLANTIC NORTH        188</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">run_query</span>(Samples, <span class="st">&quot;StormEvents | summarize EventCount = count() by State | order by State asc&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">head</span>(res)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">##            State EventCount</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">## 1        ALABAMA       1315</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">## 2         ALASKA        257</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">## 3 AMERICAN SAMOA         16</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">## 4        ARIZONA        340</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">## 5       ARKANSAS       1028</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">## 6 ATLANTIC NORTH        188</span></a></code></pre></div>
 <p><code>run_query()</code> also supports query parameters, to allow you to call parameterized Kusto functions. Simply pass your parameters as additional keyword arguments and they will be escaped and interpolated into the query string.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">res &lt;-<span class="st"> </span><span class="kw">run_query</span>(Samples, <span class="st">&quot;MyFunction(lim)&quot;</span>, <span class="dt">lim=</span>10L)</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw">head</span>(res)</a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">##             StartTime             EndTime EpisodeId EventId          State</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">## 1 2007-09-29 08:11:00 2007-09-29 08:11:00     11091   61032 ATLANTIC SOUTH</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co">## 2 2007-09-18 20:00:00 2007-09-19 18:00:00     11074   60904        FLORIDA</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co">## 3 2007-09-20 21:57:00 2007-09-20 22:05:00     11078   60913        FLORIDA</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">## 4 2007-12-30 16:00:00 2007-12-30 16:05:00     11749   64588        GEORGIA</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">## 5 2007-12-20 07:50:00 2007-12-20 07:53:00     12554   68796    MISSISSIPPI</span></a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="co">## 6 2007-12-20 10:32:00 2007-12-20 10:36:00     12554   68814    MISSISSIPPI</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">run_query</span>(Samples, <span class="st">&quot;MyFunction(lim)&quot;</span>, <span class="dt">lim=</span>10L)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">head</span>(res)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">##             StartTime             EndTime EpisodeId EventId          State</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">## 1 2007-09-29 08:11:00 2007-09-29 08:11:00     11091   61032 ATLANTIC SOUTH</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">## 2 2007-09-18 20:00:00 2007-09-19 18:00:00     11074   60904        FLORIDA</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">## 3 2007-09-20 21:57:00 2007-09-20 22:05:00     11078   60913        FLORIDA</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">## 4 2007-12-30 16:00:00 2007-12-30 16:05:00     11749   64588        GEORGIA</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">## 5 2007-12-20 07:50:00 2007-12-20 07:53:00     12554   68796    MISSISSIPPI</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">## 6 2007-12-20 10:32:00 2007-12-20 10:36:00     12554   68814    MISSISSIPPI</span></a></code></pre></div>
 <p><code>run_query()</code> can also handle command statements, which begin with a ‘.’ character. Command statements do not accept parameters and cannot be combined together with query statements in the same request.</p>
 <p>Command statements return a list where the first element is the table returned by the command (if any) and the other elements contain command metadata.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">res &lt;-<span class="st"> </span><span class="kw">run_query</span>(Samples, <span class="st">&quot;.show tables | count&quot;</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2">res[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">##   Count</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">## 1     5</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">run_query</span>(Samples, <span class="st">&quot;.show tables | count&quot;</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">res[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">##   Count</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">## 1     5</span></a></code></pre></div>
 <div id="dplyr-interface" class="section level3">
 <h3>dplyr Interface</h3>
 <p>The package also implements a <a href="https://github.com/tidyverse/dplyr">dplyr</a>-style interface for building a query upon a <code>tbl_kusto</code> object and then running it on the remote Kusto database and returning the result as a regular tibble object with <code>collect()</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3">StormEvents &lt;-<span class="st"> </span><span class="kw">tbl_kusto</span>(Samples, <span class="st">&quot;StormEvents&quot;</span>)</a>
-<a class="sourceLine" id="cb5-4" title="4"></a>
-<a class="sourceLine" id="cb5-5" title="5">q &lt;-<span class="st"> </span>StormEvents <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="st">    </span><span class="kw">group_by</span>(State) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">EventCount=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="st">    </span><span class="kw">arrange</span>(State)</a>
-<a class="sourceLine" id="cb5-9" title="9"></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="kw">show_query</span>(q)</a>
-<a class="sourceLine" id="cb5-11" title="11"></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="co">## &lt;KQL&gt; database(&#39;Samples&#39;).[&#39;StormEvents&#39;]</span></a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">## | summarize [&#39;EventCount&#39;] = count() by [&#39;State&#39;]</span></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="co">## | order by [&#39;State&#39;] asc</span></a>
-<a class="sourceLine" id="cb5-15" title="15"></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="kw">collect</span>(q)</a>
-<a class="sourceLine" id="cb5-17" title="17"></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co">## # A tibble: 67 x 2</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co">##    State          EventCount</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co">##    &lt;chr&gt;               &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-21" title="21"><span class="co">##  1 ALABAMA              1315</span></a>
-<a class="sourceLine" id="cb5-22" title="22"><span class="co">##  2 ALASKA                257</span></a>
-<a class="sourceLine" id="cb5-23" title="23"><span class="co">##  3 AMERICAN SAMOA         16</span></a>
-<a class="sourceLine" id="cb5-24" title="24"><span class="co">##  4 ARIZONA               340</span></a>
-<a class="sourceLine" id="cb5-25" title="25"><span class="co">##  5 ARKANSAS             1028</span></a>
-<a class="sourceLine" id="cb5-26" title="26"><span class="co">##  6 ATLANTIC NORTH        188</span></a>
-<a class="sourceLine" id="cb5-27" title="27"><span class="co">##  7 ATLANTIC SOUTH        193</span></a>
-<a class="sourceLine" id="cb5-28" title="28"><span class="co">##  8 CALIFORNIA            898</span></a>
-<a class="sourceLine" id="cb5-29" title="29"><span class="co">##  9 COLORADO             1654</span></a>
-<a class="sourceLine" id="cb5-30" title="30"><span class="co">## 10 CONNECTICUT           148</span></a>
-<a class="sourceLine" id="cb5-31" title="31"><span class="co">## # ... with 57 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">StormEvents &lt;-<span class="st"> </span><span class="kw">tbl_kusto</span>(Samples, <span class="st">&quot;StormEvents&quot;</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">q &lt;-<span class="st"> </span>StormEvents <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">    </span><span class="kw">group_by</span>(State) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">EventCount=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">    </span><span class="kw">arrange</span>(State)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw">show_query</span>(q)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">## &lt;KQL&gt; database('Samples').['StormEvents']</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">## | summarize ['EventCount'] = count() by ['State']</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">## | order by ['State'] asc</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="kw">collect</span>(q)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">## # A tibble: 67 x 2</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">##    State          EventCount</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">##    &lt;chr&gt;               &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">##  1 ALABAMA              1315</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">##  2 ALASKA                257</span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">##  3 AMERICAN SAMOA         16</span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">##  4 ARIZONA               340</span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">##  5 ARKANSAS             1028</span></a>
+<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co">##  6 ATLANTIC NORTH        188</span></a>
+<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">##  7 ATLANTIC SOUTH        193</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">##  8 CALIFORNIA            898</span></a>
+<a class="sourceLine" id="cb5-29" data-line-number="29"><span class="co">##  9 COLORADO             1654</span></a>
+<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co">## 10 CONNECTICUT           148</span></a>
+<a class="sourceLine" id="cb5-31" data-line-number="31"><span class="co">## # ... with 57 more rows</span></a></code></pre></div>
 <p><code>tbl_kusto</code> also accepts query parameters, in case the Kusto source table is a parameterized function:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">MyFunctionDate &lt;-<span class="st"> </span><span class="kw">tbl_kusto</span>(Samples, <span class="st">&quot;MyFunctionDate(dt)&quot;</span>, <span class="dt">dt=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019-01-01&quot;</span>))</a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3">MyFunctionDate <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="st">    </span><span class="kw">select</span>(StartTime, EndTime, EpisodeId, EventId, State) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="st">    </span><span class="kw">head</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="st">    </span><span class="kw">collect</span>()</a>
-<a class="sourceLine" id="cb6-7" title="7"></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">## # A tibble: 6 x 5</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">##   StartTime           EndTime             EpisodeId EventId State         </span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">##   &lt;dttm&gt;              &lt;dttm&gt;                  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;         </span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">## 1 2007-09-29 08:11:00 2007-09-29 08:11:00     11091   61032 ATLANTIC SOUTH</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">## 2 2007-09-18 20:00:00 2007-09-19 18:00:00     11074   60904 FLORIDA       </span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">## 3 2007-09-20 21:57:00 2007-09-20 22:05:00     11078   60913 FLORIDA       </span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">## 4 2007-12-30 16:00:00 2007-12-30 16:05:00     11749   64588 GEORGIA       </span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">## 5 2007-12-20 07:50:00 2007-12-20 07:53:00     12554   68796 MISSISSIPPI   </span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">## 6 2007-12-20 10:32:00 2007-12-20 10:36:00     12554   68814 MISSISSIPPI   </span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">MyFunctionDate &lt;-<span class="st"> </span><span class="kw">tbl_kusto</span>(Samples, <span class="st">&quot;MyFunctionDate(dt)&quot;</span>, <span class="dt">dt=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019-01-01&quot;</span>))</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">MyFunctionDate <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">    </span><span class="kw">select</span>(StartTime, EndTime, EpisodeId, EventId, State) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">    </span><span class="kw">head</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">    </span><span class="kw">collect</span>()</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">## # A tibble: 6 x 5</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">##   StartTime           EndTime             EpisodeId EventId State         </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">##   &lt;dttm&gt;              &lt;dttm&gt;                  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;         </span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">## 1 2007-09-29 08:11:00 2007-09-29 08:11:00     11091   61032 ATLANTIC SOUTH</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">## 2 2007-09-18 20:00:00 2007-09-19 18:00:00     11074   60904 FLORIDA       </span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">## 3 2007-09-20 21:57:00 2007-09-20 22:05:00     11078   60913 FLORIDA       </span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">## 4 2007-12-30 16:00:00 2007-12-30 16:05:00     11749   64588 GEORGIA       </span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">## 5 2007-12-20 07:50:00 2007-12-20 07:53:00     12554   68796 MISSISSIPPI   </span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">## 6 2007-12-20 10:32:00 2007-12-20 10:36:00     12554   68814 MISSISSIPPI   </span></a></code></pre></div>
 </div>
 <div id="dbi-interface" class="section level3">
 <h3>DBI interface</h3>
@@ -411,25 +414,25 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li>It only supports synchronous queries, with a default timeout of 4 minutes. <code>dbSendQuery</code> and <code>dbSendStatement</code> will wait for the query to execute, rather than returning immediately. The object returned contains the full result of the query, which <code>dbFetch</code> extracts.</li>
 <li>The Kusto Query Language (KQL) is not SQL, and so higher-level SQL methods are not implemented.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(DBI)</a>
-<a class="sourceLine" id="cb7-2" title="2"></a>
-<a class="sourceLine" id="cb7-3" title="3">Samples &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">AzureKusto</span>(),</a>
-<a class="sourceLine" id="cb7-4" title="4">                     <span class="dt">server=</span><span class="st">&quot;https://help.kusto.windows.net&quot;</span>,</a>
-<a class="sourceLine" id="cb7-5" title="5">                     <span class="dt">database=</span><span class="st">&quot;Samples&quot;</span>)</a>
-<a class="sourceLine" id="cb7-6" title="6"></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="kw">dbListTables</span>(Samples)</a>
-<a class="sourceLine" id="cb7-8" title="8"></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">## [1] &quot;StormEvents&quot;       &quot;demo_make_series1&quot; &quot;demo_series2&quot;     </span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">## [4] &quot;demo_series3&quot;      &quot;demo_many_series1&quot;</span></a>
-<a class="sourceLine" id="cb7-11" title="11"></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="kw">dbExistsTable</span>(Samples, <span class="st">&quot;StormEvents&quot;</span>)</a>
-<a class="sourceLine" id="cb7-13" title="13"></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="co">##[1] TRUE</span></a>
-<a class="sourceLine" id="cb7-15" title="15"></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="kw">dbGetQuery</span>(Samples, <span class="st">&quot;StormEvents | summarize ct = count()&quot;</span>)</a>
-<a class="sourceLine" id="cb7-17" title="17"></a>
-<a class="sourceLine" id="cb7-18" title="18"><span class="co">##      ct</span></a>
-<a class="sourceLine" id="cb7-19" title="19"><span class="co">## 1 59066</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(DBI)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">Samples &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">AzureKusto</span>(),</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">                     <span class="dt">server=</span><span class="st">&quot;https://help.kusto.windows.net&quot;</span>,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">                     <span class="dt">database=</span><span class="st">&quot;Samples&quot;</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">dbListTables</span>(Samples)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">## [1] &quot;StormEvents&quot;       &quot;demo_make_series1&quot; &quot;demo_series2&quot;     </span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">## [4] &quot;demo_series3&quot;      &quot;demo_many_series1&quot;</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="kw">dbExistsTable</span>(Samples, <span class="st">&quot;StormEvents&quot;</span>)</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">##[1] TRUE</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="kw">dbGetQuery</span>(Samples, <span class="st">&quot;StormEvents | summarize ct = count()&quot;</span>)</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">##      ct</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">## 1 59066</span></a></code></pre></div>
 </div>
 
 
