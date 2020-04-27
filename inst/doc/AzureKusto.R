@@ -1,10 +1,10 @@
-## ---- include = FALSE----------------------------------------------------
+## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "##"
 )
 
-## ----setup, eval = FALSE-------------------------------------------------
+## ----setup, eval = FALSE------------------------------------------------------
 #  library(AzureKusto)
 #  ## The first time you import AzureKusto, you'll be asked if you'd like to create a directory to cache OAuth2 tokens.
 #  
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 #  ## Authentication complete.
 #  
 
-## ----run_query, eval = FALSE---------------------------------------------
+## ----run_query, eval = FALSE--------------------------------------------------
 #  res <- run_query(Samples, "StormEvents | summarize EventCount = count() by State | order by State asc")
 #  head(res)
 #  
@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 #  ## 6 ATLANTIC NORTH        188
 #  
 
-## ----run_query_params, eval = FALSE--------------------------------------
+## ----run_query_params, eval = FALSE-------------------------------------------
 #  res <- run_query(Samples, "MyFunction(lim)", lim=10L)
 #  head(res)
 #  
@@ -43,7 +43,7 @@ knitr::opts_chunk$set(
 #  ## 6 2007-12-20 10:32:00 2007-12-20 10:36:00     12554   68814    MISSISSIPPI
 #  
 
-## ----run_query_commands, eval = FALSE------------------------------------
+## ----run_query_commands, eval = FALSE-----------------------------------------
 #  res <- run_query(Samples, ".show tables | count")
 #  res[[1]]
 #  
@@ -51,7 +51,7 @@ knitr::opts_chunk$set(
 #  ## 1     5
 #  
 
-## ----dplyr, eval = FALSE-------------------------------------------------
+## ----dplyr, eval = FALSE------------------------------------------------------
 #  library(dplyr)
 #  
 #  StormEvents <- tbl_kusto(Samples, "StormEvents")
@@ -85,7 +85,7 @@ knitr::opts_chunk$set(
 #  ## # ... with 57 more rows
 #  
 
-## ----tbl_kusto_params, eval = FALSE--------------------------------------
+## ----tbl_kusto_params, eval = FALSE-------------------------------------------
 #  MyFunctionDate <- tbl_kusto(Samples, "MyFunctionDate(dt)", dt=as.Date("2019-01-01"))
 #  
 #  MyFunctionDate %>%
@@ -104,7 +104,7 @@ knitr::opts_chunk$set(
 #  ## 6 2007-12-20 10:32:00 2007-12-20 10:36:00     12554   68814 MISSISSIPPI
 #  
 
-## ----dbi, eval = FALSE---------------------------------------------------
+## ----dbi, eval = FALSE--------------------------------------------------------
 #  library(DBI)
 #  
 #  Samples <- dbConnect(AzureKusto(),
