@@ -2,7 +2,7 @@
 
 [![CRAN](https://www.r-pkg.org/badges/version/AzureKusto)](https://cran.r-project.org/package=AzureKusto)
 ![Downloads](https://cranlogs.r-pkg.org/badges/AzureKusto)
-[![Build Status](https://asiadatascience.visualstudio.com/AzureR/_apis/build/status/Azure.AzureKusto?branchName=master)](https://asiadatascience.visualstudio.com/AzureR/_build/latest?definitionId=8&branchName=master)
+![R-CMD-check](https://github.com/Azure/AzureKusto/workflows/R-CMD-check/badge.svg)
 
 R interface to Kusto, also known as [Azure Data Explorer](https://azure.microsoft.com/en-us/services/data-explorer/), a fast and highly scalable data exploration service.
 
@@ -33,7 +33,7 @@ library(AzureKusto)
 
 Samples <- kusto_database_endpoint(server="https://help.kusto.windows.net", database="Samples")
 
-# To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code FPD8GZPY9 to authenticate.
+# To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code [your device code here] to authenticate.
 # Waiting for device code in browser...
 # Press Esc/Ctrl + C to abort
 # Authentication complete.
