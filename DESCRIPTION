@@ -1,13 +1,13 @@
 Package: AzureKusto
 Title: Interface to 'Kusto'/'Azure Data Explorer'
-Version: 1.0.7
+Version: 1.1.0
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi73@gmail.com", role = "aut"),
     person("Alex", "Kyllo", , "jekyllo@microsoft.com", role = c("aut", "cre")),
     person("dbplyr development team", role="cph", comment="Original framework for dplyr/database interface"),
     person("Microsoft", role = "cph")
     )
-Description: An interface to 'Azure Data Explorer', also known as 'Kusto', a fast, highly scalable data exploration service from Microsoft: <https://azure.microsoft.com/en-us/services/data-explorer/>. Includes 'DBI' and 'dplyr' interfaces, with the latter modelled after the 'dbplyr' package, whereby queries are translated from R into the native 'KQL' query language and executed lazily. On the admin side, the package extends the object framework provided by 'AzureRMR' to support creation and deletion of databases, and management of database principals. Part of the 'AzureR' family of packages.
+Description: An interface to 'Azure Data Explorer', also known as 'Kusto', a fast, highly scalable data exploration service from Microsoft: <https://azure.microsoft.com/en-us/products/data-explorer/>. Includes 'DBI' and 'dplyr' interfaces, with the latter modelled after the 'dbplyr' package, whereby queries are translated from R into the native 'KQL' query language and executed lazily. On the admin side, the package extends the object framework provided by 'AzureRMR' to support creation and deletion of databases, and management of database principals. Part of the 'AzureR' family of packages.
 URL: https://github.com/Azure/AzureKusto
         https://github.com/Azure/AzureR
 BugReports: https://github.com/Azure/AzureKusto/issues
@@ -22,7 +22,7 @@ Suggests: bit64, knitr, testthat, tidyr, AzureGraph, AzureStor (>=
         2.0.0), rmarkdown
 RoxygenNote: 7.2.1
 NeedsCompilation: no
-Packaged: 2022-08-26 15:26:31 UTC; alex
+Packaged: 2022-12-21 05:17:15 UTC; alex
 Author: Hong Ooi [aut],
   Alex Kyllo [aut, cre],
   dbplyr development team [cph] (Original framework for dplyr/database
@@ -30,4 +30,4 @@ Author: Hong Ooi [aut],
   Microsoft [cph]
 Maintainer: Alex Kyllo <jekyllo@microsoft.com>
 Repository: CRAN
-Date/Publication: 2022-08-26 16:14:35 UTC
+Date/Publication: 2022-12-21 08:20:11 UTC
