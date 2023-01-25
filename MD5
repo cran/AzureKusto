@@ -1,7 +1,7 @@
-965f625de003cbb655f3d72b21dd8662 *DESCRIPTION
+928aa52430b8ba43611d1a0415eb9aac *DESCRIPTION
 863e527aa935cd99e1d1bcc615dc25f1 *LICENSE
 ffde0e1b451fe08aa5fe35675e072948 *NAMESPACE
-ecb8be34d32bf1bc9e06a005781786f4 *NEWS.md
+85463d796bc192fa2df7e2de2f8463c8 *NEWS.md
 ebb9947327d691961c52859b25c80fdb *R/AzureKusto.R
 2a2c19a3884e74c6c1fa4868dfcf884c *R/add_methods.R
 3c014bbf5b9d25c3dac9be82b4d12db0 *R/az_database.R
@@ -19,12 +19,12 @@ a908fe8debf0d271a5b6d3e1d962c814 *R/ops.R
 978db4997a5ac4e6333c67763ea5a990 *R/query.R
 95a7c5e200815e162228723ddad8b468 *R/reexport-dplyr.R
 9c558cb5fc2fb689aa85cb40604b74fa *R/tbl.R
-98cc24e910ecb7105ca1963c4560d338 *R/translate-kql.R
+b1d43296bacbb36bc8ede7e36d8eac34 *R/translate-kql.R
 6321a2e87417e98a3c038e8e89d728a1 *README.md
 7a319c39a7f72b3de60a75332c5f1f41 *build/vignette.rds
 674af0ff0b82fc81aae34015b513a900 *inst/doc/AzureKusto.R
 23c1fd9615e8af958648babeba42f7e4 *inst/doc/AzureKusto.Rmd
-1742d2773cfaa8ae97dc479f0492223c *inst/doc/AzureKusto.html
+2cc4c5b2e873db1ace34c2f448590388 *inst/doc/AzureKusto.html
 b6472cca88b279d8b77dd6b51d0a2751 *man/AzureKusto.Rd
 6b602055c2ab92ad855e5ae7559a71ac *man/AzureKustoConnection-class.Rd
 680636558bd97b8053a9dc5bf2706f91 *man/AzureKustoDriver-class.Rd
@@ -37,7 +37,7 @@ ec8cb23b26ffec464bda220435d756c7 *man/DBI_table.Rd
 74c829c2f8710804e81553b98d42dec0 *man/az_kusto.Rd
 aa7e458bf304e5382e1803badb02431a *man/az_kusto_database.Rd
 2aae716b7014c86aadc0ca52d4b16d04 *man/base_agg.Rd
-1fadea200b25a34cc08bd602937a3a1d *man/base_scalar.Rd
+cb6fd920fe21ffc849c093630b471028 *man/base_scalar.Rd
 f760eff353c3b79c3f18e6255265df11 *man/base_window.Rd
 0260583a5e34cc3a4022a2e74a11a930 *man/build_kql.Rd
 96312af9f7f8e1dc0857b8c8c7c02f0b *man/collect.tbl_kusto.Rd
@@ -103,5 +103,5 @@ e41dab41a2b1c993f024f4eba7e4d1c1 *tests/testthat/test06_dplyr.R
 7d71d672a98ee355b7e059fcb0d03de3 *tests/testthat/test_kql_build.R
 0837add09401a3a8f409eae467f72803 *tests/testthat/test_partial_eval.R
 1631c15e5d4a001a44a6eb20197180af *tests/testthat/test_query_params.R
-3fab3b88f2fd2de3ccfb698d7d2b1b2c *tests/testthat/test_translate.r
+f35812166078fc82f0e5a2c5f6a4bec2 *tests/testthat/test_translate.r
 23c1fd9615e8af958648babeba42f7e4 *vignettes/AzureKusto.Rmd
