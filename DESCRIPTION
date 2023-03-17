@@ -1,6 +1,6 @@
 Package: AzureKusto
 Title: Interface to 'Kusto'/'Azure Data Explorer'
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi73@gmail.com", role = "aut"),
     person("Alex", "Kyllo", , "jekyllo@microsoft.com", role = c("aut", "cre")),
@@ -16,13 +16,13 @@ Encoding: UTF-8
 VignetteBuilder: knitr
 Depends: R (>= 3.3)
 Imports: rlang, methods, utils, httr (>= 1.3), jsonlite, R6, openssl,
-        AzureAuth, AzureRMR (>= 2.0.0), tibble, dplyr, tidyselect (>=
-        0.2.4), DBI (>= 1.0.0)
-Suggests: bit64, knitr, testthat, tidyr, AzureGraph, AzureStor (>=
-        2.0.0), rmarkdown
-RoxygenNote: 7.2.1
+        AzureAuth, AzureRMR (>= 2.0.0), tibble, dplyr, tidyr,
+        tidyselect (>= 0.2.4), DBI (>= 1.0.0)
+Suggests: bit64, knitr, testthat, AzureGraph, AzureStor (>= 2.0.0),
+        rmarkdown
+RoxygenNote: 7.2.2
 NeedsCompilation: no
-Packaged: 2023-01-25 22:52:25 UTC; alex
+Packaged: 2023-03-17 14:11:57 UTC; alex
 Author: Hong Ooi [aut],
   Alex Kyllo [aut, cre],
   dbplyr development team [cph] (Original framework for dplyr/database
@@ -30,4 +30,4 @@ Author: Hong Ooi [aut],
   Microsoft [cph]
 Maintainer: Alex Kyllo <jekyllo@microsoft.com>
 Repository: CRAN
-Date/Publication: 2023-01-25 23:00:02 UTC
+Date/Publication: 2023-03-17 14:40:02 UTC
