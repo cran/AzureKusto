@@ -1,13 +1,13 @@
-39621fdfed6dd21fe6c4f7c5904cfad6 *DESCRIPTION
+08c0beca2274bc5e253c90291ebeb613 *DESCRIPTION
 863e527aa935cd99e1d1bcc615dc25f1 *LICENSE
 db7c2fda6aa1d085dfc3f0d63e5655d0 *NAMESPACE
-e3e19f50fe17d0c6d3e6032c5a02d514 *NEWS.md
+f6cf7549460f2453d29c421686e0c665 *NEWS.md
 468acea90bfcffbe47d94d8c5c82294f *R/AzureKusto.R
 2a2c19a3884e74c6c1fa4868dfcf884c *R/add_methods.R
 3c014bbf5b9d25c3dac9be82b4d12db0 *R/az_database.R
 bc931dff78d9dbb8dd89e6476ce30eca *R/az_kusto.R
 01d042b68426f1b07b7646b483cf1a15 *R/dbi.R
-582343ea667119f3e3b1a45276d44f96 *R/endpoint.R
+d506389e92ddb5be87f0588c965447e4 *R/endpoint.R
 b61c214b67447f053204471b5623315b *R/ident.R
 8315383ded010518140df85098347c20 *R/ingest.R
 9f0e9e8c9b63971e84d19dc2ef15e64d *R/kql-build.R
@@ -21,7 +21,7 @@ a908fe8debf0d271a5b6d3e1d962c814 *R/ops.R
 9df1697d5cfec2d1068276cc208122db *R/tbl.R
 b1d43296bacbb36bc8ede7e36d8eac34 *R/translate-kql.R
 6321a2e87417e98a3c038e8e89d728a1 *README.md
-7a319c39a7f72b3de60a75332c5f1f41 *build/vignette.rds
+c4621c7c3b4a8015a3b8ede5b62e76ad *build/vignette.rds
 674af0ff0b82fc81aae34015b513a900 *inst/doc/AzureKusto.R
 23c1fd9615e8af958648babeba42f7e4 *inst/doc/AzureKusto.Rmd
 2cc4c5b2e873db1ace34c2f448590388 *inst/doc/AzureKusto.html
@@ -44,7 +44,7 @@ f760eff353c3b79c3f18e6255265df11 *man/base_window.Rd
 8ad14e7290ada99541f9dbde521d5082 *man/compute.tbl_kusto.Rd
 7975df52231c7f12570d71a471ca2889 *man/copy_to.kusto_database_endpoint.Rd
 f8ade506bb952e1135552079416f5b68 *man/create_kusto_cluster.Rd
-f0950f3bd32dd163c444710964d807f3 *man/database_endpoint.Rd
+fbd005e8cd77863ee129563d5619c662 *man/database_endpoint.Rd
 8dcddb3ea0ce235294d0a7318cad92fc *man/delete_kusto_cluster.Rd
 bd7244d45909057e78fa39d55a99b510 *man/escape.Rd
 6b8e8430b81885a7f197b10388df3454 *man/export.Rd
@@ -99,7 +99,7 @@ d9f9adde7a32f9e420630def506545c0 *tests/resources/iris.csv
 a2b11f7c4d36d1d3f0432b1dbbef4057 *tests/testthat/test04_ingest.R
 0b771692aac60f13daedc2e1c3edf34b *tests/testthat/test05_dbi.R
 e41dab41a2b1c993f024f4eba7e4d1c1 *tests/testthat/test06_dplyr.R
-4a99c6b52da1e9d2d94ef1b4cc6ac6fc *tests/testthat/test_escape.r
+b11567694711764da2da52f73055cd63 *tests/testthat/test_escape.r
 7d71d672a98ee355b7e059fcb0d03de3 *tests/testthat/test_kql_build.R
 0837add09401a3a8f409eae467f72803 *tests/testthat/test_partial_eval.R
 1631c15e5d4a001a44a6eb20197180af *tests/testthat/test_query_params.R
